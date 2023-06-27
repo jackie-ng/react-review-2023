@@ -48,7 +48,8 @@ const ExpenseForm = (props) => {
       date: new Date(enteredDate),
     };
 
-    props.onSaveExpenseData(expenseData);
+    props.onSaveExpenseData(expenseData); //ExpenseForm: child to parent componenent -- bottom-up
+    //clear the input after user input data
     setEnteredTitle('');
     setEnteredAmount('');
     setEnteredDate('');
