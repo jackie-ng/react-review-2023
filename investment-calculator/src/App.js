@@ -2,15 +2,21 @@ import './App.css';
 import Header from './components/Header/Header';
 import ResultTable from './components/ResultTable/ResultTable';
 import UserInput from './components/UserInput/UserInput';
+import { useState } from 'react';
 // import logo from "./investment-calculator-logo.png";
 
 function App() {
+  const [userInput, setUserInput] = useState(null)
+
   const calculateHandler = (userInput) => {
     // Should be triggered when form is submitted
     // You might not directly want to bind it to the submit event on the form though...
+    setUserInput(userInput)
+  };
 
-    const yearlyData = []; // per-year results
+  const yearlyData = []; // per-year results
 
+  if (userInput) {
     let currentSavings = +userInput["current-savings"]; // feel free to change the shape of this input object!
     const yearlyContribution = +userInput["yearly-contribution"]; // as mentioned: feel free to change the shape...
     const expectedReturn = +userInput["expected-return"] / 100;
@@ -28,15 +34,15 @@ function App() {
         yearlyContribution: yearlyContribution
       });
     }
+  }
 
-    // do something with yearlyData ...
-  };
 
   return (
     <div>
       <Header/>
-      <UserInput/>
-      <ResultTable/>
+      <UserInput onCalculate={calculateHandler}/>
+      {!userInput && <p style={{textAlign: 'center'}}>No investment calculated yet.</p>}
+      {userInput && <ResultTable data={yearlyData} initialInvestment={userInput['current-savings']}/>}
     </div>
   );
 }
