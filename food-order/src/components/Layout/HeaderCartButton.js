@@ -29,7 +29,7 @@ const HeaderCartButton = (props) => {
     }, 300);
 
     return () => {
-      clearTimeout(timer);
+      clearTimeout(timer); // clean up function
     };
   }, [items]);
 
