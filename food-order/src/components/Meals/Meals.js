@@ -1,14 +1,15 @@
-import AvailableMeals from "./AvailableMeals";
-import MealsSummary from "./MealsSummary";
-import Modal from '../UI/Modal'
+import { Fragment } from 'react';
 
-function Meals() {
+import MealsSummary from './MealsSummary';
+import AvailableMeals from './AvailableMeals';
+
+const Meals = () => {
   return (
-    <Modal>
-      <MealsSummary/>
-      <AvailableMeals/>
-    </Modal>
-   );
-}
+    <Fragment>
+      <MealsSummary />
+      <AvailableMeals />
+    </Fragment>
+  );
+};
 
 export default Meals;
