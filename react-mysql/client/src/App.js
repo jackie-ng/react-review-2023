@@ -1,26 +1,26 @@
-import { useEffect, useState } from 'react';
 import './App.css';
-import axios from "axios";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import Home from './pages/Home';
+import CreatePost from './pages/CreatePost';
 
 function App() {
-  const [listOfPosts, setListOfPosts] = useState([])
-  useEffect(() => {
-    axios.get("http://localhost:3001/posts").then((response) => {
-      // console.log(response.data)
-      setListOfPosts(response.data)
-    })
-  }, [])
+
   return (
     <div className="App">
-      {listOfPosts.map((value, key) => {
-        return (
-          <div className='post'>
-            <div className='title'>{value.title}</div>
-            <div className='body'>{value.postText}</div>
-            <div className='footer'>{value.username}</div>
-          </div>
-        )
-      })}
+      <Router>
+        <Link onClick={() => { window.location.href = "/" }} to="/">Homepage</Link>
+        <Link onClick={() => { window.location.href = "/createpost" }} to="/createpost">Create A Post</Link>
+        <Switch>
+          <Route path="/" exact component={Home} />
+          <Route path="/createpost" exact component={CreatePost} />
+
+        </Switch>
+      </Router>
     </div>
   );
 }
