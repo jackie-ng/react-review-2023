@@ -12,8 +12,8 @@ function CreatePost(props) {
 
   const onSubmit = (data) => {
     axios.post("http://localhost:3001/posts", data).then((response) => {
-      // console.log(response.data)
-      console.log("It worked")
+      // console.log(response)
+      window.location.href = `/`
     })
   }
 
@@ -52,10 +52,10 @@ function CreatePost(props) {
             name="username"
             placeholder="Username..."
           />
-          <button type="submit">Create Post</button>
+          <button type="submit" onClick={onSubmit}>Create Post</button>
         </Form>
       </Formik>
-    </div>
+    </div >
   )
 }
 
