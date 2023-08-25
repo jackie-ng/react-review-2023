@@ -4,7 +4,7 @@ import * as Yup from 'yup';
 import axios from "axios";
 
 function CreatePost(props) {
-  const initialValue = {
+  const initialValues = {
     title: "",
     postText: "",
     username: ""
@@ -25,7 +25,7 @@ function CreatePost(props) {
   return (
     <div className='createPostPage'>
       <Formik
-        enableReinitialize={true} initialValue={initialValue} onSubmit={onSubmit} validationSchema={validationSchema}
+        enableReinitialize={true} initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}
       >
         <Form className='formContainer'>
           <label>Title: </label>
