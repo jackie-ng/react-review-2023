@@ -13,8 +13,16 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <Link onClick={() => { window.location.href = "/" }} to="/">Homepage</Link>
-        <Link onClick={() => { window.location.href = "/createpost" }} to="/createpost">Create A Post</Link>
+        <Link
+          onClick={() => { window.location.href = "/" }}
+          to="/">
+          Homepage
+        </Link>
+        <Link
+          onClick={() => { window.location.href = "/createpost" }}
+          to="/createpost">
+          Create A Post
+        </Link>
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/createpost" exact component={CreatePost} />
