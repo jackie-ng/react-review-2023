@@ -1,0 +1,52 @@
+.auth {
+  align-items: center;
+  background-color: #b9e7e7;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100vh;
+  width: 100vh;
+}
+
+.auth h1 {
+  font-size: 20px;
+  color: teal;
+  margin-bottom: 20px;
+}
+
+.auth form {
+  background-color: white;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 50px;
+  width: 200px;
+}
+
+.auth input {
+  padding: 10px;
+  border: none;
+  /* border-bottom: 1px solid gray; */
+  border-radius: 30px;
+}
+
+.auth button {
+  padding: 10px;
+  border: none;
+  border-radius: 30px;
+  background-color: teal;
+  cursor: pointer;
+  color: white
+}
+
+.auth span {
+  font-size: 12px;
+  text-align: center ;
+}
+
+.auth p {
+  font-size: 12px;
+  text-align: center ;
+  color: red;
+}

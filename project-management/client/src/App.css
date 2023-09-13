@@ -1,0 +1,16 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  align-content: flex-start;
+  height: 100vh;
+  /* background-color: brown; */
+
+}
+
+.app .links {
+  text-decoration: none;
+  color: inherit;
+}
+

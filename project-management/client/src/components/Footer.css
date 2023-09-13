@@ -1,0 +1,9 @@
+.footer .container {
+  width: 1024px;
+  padding: 10px 0px;
+  display: flex;
+  justify-content: space-between;
+  /* flex-wrap: wrap; */
+  background-color: rgb(157, 231, 231);;
+}
+
