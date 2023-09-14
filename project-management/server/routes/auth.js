@@ -1,6 +1,6 @@
 // LOGIN & REGISTER
 import express from "express"
-import { logout, register, login } from "../controllers/auth.js "
+import { logout, register, login } from "../controllers/auth.js"
 // import { addPost } from "../controllers/post.js"
 
 const router = express.Router()
