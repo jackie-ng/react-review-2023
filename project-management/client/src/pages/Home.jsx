@@ -4,38 +4,40 @@ import { Link } from 'react-router-dom'
 
 export default function Home() {
 
-  const posts = [
-    {
-      id: 1,
-      title: "Title 1",
-      desc: "Description 1",
-      img: "img-1.png"
-    },
-    {
-      id: 2,
-      title: "Title 2",
-      desc: "Description 2",
-      img: "img-2.png"
-    },
-    {
-      id: 3,
-      title: "Title 3",
-      desc: "Description 3",
-      img: "img-3.png"
-    },
-    {
-      id: 4,
-      title: "Title 4",
-      desc: "Description 4",
-      img: "img-4.png"
-    },
-    {
-      id: 5,
-      title: "Title 5",
-      desc: "Description 5",
-      img: "img-5.png"
-    },
-  ]
+  const [posts, setPosts] = useState([])
+
+  // const posts = [
+  //   {
+  //     id: 1,
+  //     title: "Title 1",
+  //     desc: "Description 1",
+  //     img: "img-1.png"
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Title 2",
+  //     desc: "Description 2",
+  //     img: "img-2.png"
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Title 3",
+  //     desc: "Description 3",
+  //     img: "img-3.png"
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "Title 4",
+  //     desc: "Description 4",
+  //     img: "img-4.png"
+  //   },
+  //   {
+  //     id: 5,
+  //     title: "Title 5",
+  //     desc: "Description 5",
+  //     img: "img-5.png"
+  //   },
+  // ]
   return (
     <div className='home'>
       <div className='posts'>

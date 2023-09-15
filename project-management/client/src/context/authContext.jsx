@@ -3,7 +3,7 @@ import axios from 'axios'
 
 export const AuthContext = createContext()
 
-export const AuthContextProvider = ({ children }) => {
+export const AuthContexProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("user")) || null)
 
   const login = async (inputs) => {
@@ -12,7 +12,8 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   const logout = async (inputs) => {
-    const res = await axios.post("http://localhost:8800/api/auth/logout");
+    // const res = await axios.post("http://localhost:8800/api/auth/logout");
+    localStorage.removeItem("user")
     setCurrentUser(null)
   }
 
