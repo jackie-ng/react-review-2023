@@ -1,10 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./Login.css"
-import { Link } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
+import axios from 'axios'
 
 export default function Home() {
 
   const [posts, setPosts] = useState([])
+
+  const cat = useLocation().search
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8800/api/posts/${cat}`);
+        setPosts(res.data)
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [cat])
 
   // const posts = [
   //   {

@@ -9,7 +9,11 @@ export default function Navbar() {
   return (
     <div className='navbar'>
       <div className="container">
-        <div className="logo">logo</div>
+        <div className="logo">
+          <Link to="/">
+            Logo
+          </Link>
+        </div>
         <div className="links">
           <Link className='link' to="/?cat=art"><h6>ART</h6></Link>
           <Link className='link' to="/?cat=technology"><h6>TECHNOLOGY</h6></Link>
