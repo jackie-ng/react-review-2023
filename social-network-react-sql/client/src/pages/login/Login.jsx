@@ -6,28 +6,23 @@ import "./login.scss";
 const Login = () => {
   const [inputs, setInputs] = useState({
     username: "",
-    password: ""
-  })
-  const [err, setErr] = useState(null)
+    password: "",
+  });
+  const [err, setErr] = useState(null);
 
   const navigate = useNavigate()
 
-  const handleChange = e => {
-    setInputs(prev => ({
-      ...prev,
-      [e.target.name]: e.target.value
-    }))
-  }
-
+  const handleChange = (e) => {
+    setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
   const { login } = useContext(AuthContext);
 
   const handleLogin = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       await login(inputs);
       navigate("/")
-
-    } catch (error) {
+    } catch (err) {
       setErr(err.response.data);
     }
   };
@@ -35,7 +30,7 @@ const Login = () => {
   return (
     <div className="login">
       <div className="card">
-        {/* <div className="left">
+        <div className="left">
           <h1>Hello World.</h1>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero cum,
@@ -46,12 +41,22 @@ const Login = () => {
           <Link to="/register">
             <button>Register</button>
           </Link>
-        </div> */}
+        </div>
         <div className="right">
           <h1>Login</h1>
           <form>
-            <input type="text" placeholder="Username" name="username" onChange={handleChange} />
-            <input type="password" placeholder="Password" name="password" onChange={handleChange} />
+            <input
+              type="text"
+              placeholder="Username"
+              name="username"
+              onChange={handleChange}
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              name="password"
+              onChange={handleChange}
+            />
             {err && err}
             <button onClick={handleLogin}>Login</button>
           </form>

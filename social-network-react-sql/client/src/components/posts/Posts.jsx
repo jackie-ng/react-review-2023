@@ -4,16 +4,19 @@ import { useQuery } from '@tanstack/react-query';
 import { makeRequest } from '../../axios.js'
 
 const Posts = () => {
-
+  // { isLoading, error, data }
   const { isLoading, error, data } = useQuery({
-    queryKey: ['repoData'],
+    queryKey: ['posts'],
     queryFn: () => makeRequest.get("/posts").then((res) => { return res.data })
   })
 
+
   return <div className="posts">
-    {/* {data.map(post => (
-      <Post post={post} key={post.id} />
-    ))} */}
+    {error
+      ? "Something went wrong!"
+      : isLoading
+        ? "loading"
+        : data.map((post) => <Post post={post} key={post.id} />)}
   </div>;
 };
 
