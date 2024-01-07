@@ -33,6 +33,8 @@ const Share = () => {
       queryClient.invalidateQueries({ queryKey: ["posts"] });
     }
   });
+
+
   const handleClick = async (e) => {
     e.preventDefault();
     let imgUrl = "";
