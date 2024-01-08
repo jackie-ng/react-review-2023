@@ -29,6 +29,18 @@ public class Main {
             PasswordEncoder passwordEncoder) {
         return args -> {
             createRandomCustomer(customerRepository, passwordEncoder);
+            /*
+             * s3Service.putObject(
+             * bucketName: "exactbucketnamehere",
+             * key: "foo",
+             * "Hello World".getBytes()
+             * );
+             * byte [] obj = s3Service.getObject(
+             * bucketName: "exactbucketnamehere",
+             * key: "foo"
+             * );
+             * System.out.println("Test" + new String(obj));
+             */
             // testBucketUploadAndDownload(s3Service, s3Buckets);
         };
     }
