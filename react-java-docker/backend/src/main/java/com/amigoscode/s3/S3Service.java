@@ -19,6 +19,7 @@ public class S3Service {
         this.s3 = s3;
     }
 
+    // upload an object
     public void putObject(String bucketName, String key, byte[] file) {
         PutObjectRequest objectRequest = PutObjectRequest.builder()
                 .bucket(bucketName)
@@ -27,6 +28,7 @@ public class S3Service {
         s3.putObject(objectRequest, RequestBody.fromBytes(file));
     }
 
+    // download an object
     public byte[] getObject(String bucketName, String key) {
         GetObjectRequest getObjectRequest = GetObjectRequest.builder()
                 .bucket(bucketName)
@@ -43,3 +45,7 @@ public class S3Service {
 
     }
 }
+
+// Documentation:
+// https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html
+// https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/examples-s3-buckets.html

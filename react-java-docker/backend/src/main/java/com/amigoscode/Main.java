@@ -34,17 +34,15 @@ public class Main {
     }
 
     private static void testBucketUploadAndDownload(S3Service s3Service,
-                                                    S3Buckets s3Buckets) {
+            S3Buckets s3Buckets) {
         s3Service.putObject(
                 s3Buckets.getCustomer(),
                 "foo/bar/jamila",
-                "Hello World".getBytes()
-        );
+                "Hello World".getBytes());
 
         byte[] obj = s3Service.getObject(
                 s3Buckets.getCustomer(),
-                "foo/bar/jamila"
-        );
+                "foo/bar/jamila");
 
         System.out.println("Hooray: " + new String(obj));
     }
@@ -59,7 +57,7 @@ public class Main {
         Gender gender = age % 2 == 0 ? Gender.MALE : Gender.FEMALE;
         String email = firstName.toLowerCase() + "." + lastName.toLowerCase() + "@amigoscode.com";
         Customer customer = new Customer(
-                firstName +  " " + lastName,
+                firstName + " " + lastName,
                 email,
                 passwordEncoder.encode("password"),
                 age,
