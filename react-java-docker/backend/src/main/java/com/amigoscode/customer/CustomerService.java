@@ -26,10 +26,10 @@ public class CustomerService {
     private final S3Buckets s3Buckets;
 
     public CustomerService(@Qualifier("jdbc") CustomerDao customerDao,
-                           CustomerDTOMapper customerDTOMapper,
-                           PasswordEncoder passwordEncoder,
-                           S3Service s3Service,
-                           S3Buckets s3Buckets) {
+            CustomerDTOMapper customerDTOMapper,
+            PasswordEncoder passwordEncoder,
+            S3Service s3Service,
+            S3Buckets s3Buckets) {
         this.customerDao = customerDao;
         this.customerDTOMapper = customerDTOMapper;
         this.passwordEncoder = passwordEncoder;
@@ -48,8 +48,7 @@ public class CustomerService {
         return customerDao.selectCustomerById(id)
                 .map(customerDTOMapper)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "customer with id [%s] not found".formatted(id)
-                ));
+                        "customer with id [%s] not found".formatted(id)));
     }
 
     public void addCustomer(CustomerRegistrationRequest customerRegistrationRequest) {
@@ -57,8 +56,7 @@ public class CustomerService {
         String email = customerRegistrationRequest.email();
         if (customerDao.existsCustomerWithEmail(email)) {
             throw new DuplicateResourceException(
-                    "email already taken"
-            );
+                    "email already taken");
         }
 
         // add
@@ -80,18 +78,17 @@ public class CustomerService {
     private void checkIfCustomerExistsOrThrow(Integer customerId) {
         if (!customerDao.existsCustomerById(customerId)) {
             throw new ResourceNotFoundException(
-                    "customer with id [%s] not found".formatted(customerId)
-            );
+                    "customer with id [%s] not found".formatted(customerId));
         }
     }
 
     public void updateCustomer(Integer customerId,
-                               CustomerUpdateRequest updateRequest) {
-        // TODO: for JPA use .getReferenceById(customerId) as it does does not bring object into memory and instead a reference
+            CustomerUpdateRequest updateRequest) {
+        // TODO: for JPA use .getReferenceById(customerId) as it does does not bring
+        // object into memory and instead a reference
         Customer customer = customerDao.selectCustomerById(customerId)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "customer with id [%s] not found".formatted(customerId)
-                ));
+                        "customer with id [%s] not found".formatted(customerId)));
 
         boolean changes = false;
 
@@ -108,30 +105,31 @@ public class CustomerService {
         if (updateRequest.email() != null && !updateRequest.email().equals(customer.getEmail())) {
             if (customerDao.existsCustomerWithEmail(updateRequest.email())) {
                 throw new DuplicateResourceException(
-                        "email already taken"
-                );
+                        "email already taken");
             }
             customer.setEmail(updateRequest.email());
             changes = true;
         }
 
         if (!changes) {
-           throw new RequestValidationException("no data changes found");
+            throw new RequestValidationException("no data changes found");
         }
 
         customerDao.updateCustomer(customer);
     }
 
     public void uploadCustomerProfileImage(Integer customerId,
-                                           MultipartFile file) {
+            MultipartFile file) {
+        // check if the customer exists
         checkIfCustomerExistsOrThrow(customerId);
+        // generate customer profileImageId
         String profileImageId = UUID.randomUUID().toString();
+        // Store the object in AWS or catch error
         try {
             s3Service.putObject(
                     s3Buckets.getCustomer(),
                     "profile-images/%s/%s".formatted(customerId, profileImageId),
-                    file.getBytes()
-            );
+                    file.getBytes());
         } catch (IOException e) {
             throw new RuntimeException("failed to upload profile image", e);
         }
@@ -139,22 +137,22 @@ public class CustomerService {
     }
 
     public byte[] getCustomerProfileImage(Integer customerId) {
+        // get the customer, map through customer info by customerDTOMapper.java.
+        // However, CustomerDTO doesn't have the ID => CustomerDTO.java
         var customer = customerDao.selectCustomerById(customerId)
                 .map(customerDTOMapper)
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "customer with id [%s] not found".formatted(customerId)
-                ));
+                        "customer with id [%s] not found".formatted(customerId)));
 
         if (StringUtils.isBlank(customer.profileImageId())) {
             throw new ResourceNotFoundException(
                     "customer with id [%s] profile image not found".formatted(customerId));
         }
-
+        // retrieve the profile image from that customer
         byte[] profileImage = s3Service.getObject(
                 s3Buckets.getCustomer(),
-                "profile-images/%s/%s".formatted(customerId, customer.profileImageId())
-        );
+                "profile-images/%s/%s".formatted(customerId, customer.profileImageId()));
+        // return the profile image
         return profileImage;
     }
 }
-
