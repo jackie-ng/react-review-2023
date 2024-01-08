@@ -143,7 +143,7 @@ public class CustomerService {
                 .map(customerDTOMapper)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "customer with id [%s] not found".formatted(customerId)));
-
+        // check if the profileImageId is blank => throw new error
         if (StringUtils.isBlank(customer.profileImageId())) {
             throw new ResourceNotFoundException(
                     "customer with id [%s] profile image not found".formatted(customerId));
